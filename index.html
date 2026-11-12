@@ -1,0 +1,297 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>The Used Car Buyer's Decision Kit</title>
+<meta name="description" content="A guide, printable checklists and working calculators for buying a used car from a dealer or a private seller. One-time download, $29.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@400;500;800&display=swap">
+<style>
+/* Layout: one left-aligned column; hero pairs the pitch with a worked loan comparison, then flat sections divided by hairlines. */
+:root {
+  --bg: #07080C;
+  --surface: #0E1117;
+  --line: #1D212A;
+  --fg: #FFFFFF;
+  --muted: #8B9098;
+  --brand: #00C2A8;
+  --brand-ink: #07080C;
+  --danger: #E85D4C;
+  --font: "Barlow Condensed", "Arial Narrow", "Roboto Condensed", Arial, sans-serif;
+  color-scheme: dark;
+}
+* { box-sizing: border-box; }
+body {
+  margin: 0;
+  background: var(--bg);
+  color: var(--fg);
+  font-family: var(--font);
+  font-weight: 400;
+  font-size: 19px;
+  line-height: 1.5;
+  padding-block: 20px 56px;
+  padding-left: max(16px, env(safe-area-inset-left, 0px));
+  padding-right: max(16px, env(safe-area-inset-right, 0px));
+}
+.wrap { max-width: 1080px; margin: 0 auto; }
+a { color: inherit; }
+:focus-visible { outline: 2px solid var(--brand); outline-offset: 3px; }
+
+h1, h2, h3 { font-weight: 800; text-transform: uppercase; letter-spacing: 0.01em; line-height: 0.98; margin: 0; text-wrap: balance; }
+h1 { font-size: clamp(2.5rem, 4.8vw, 4rem); }
+h2 { font-size: clamp(2rem, 5vw, 3.1rem); max-width: 14em; }
+h3 { font-size: 1.5rem; line-height: 1.05; }
+p { margin: 0; }
+.muted { color: var(--muted); }
+.label { font-weight: 500; font-size: 0.85rem; letter-spacing: 0.12em; text-transform: uppercase; color: var(--muted); }
+.num { font-variant-numeric: tabular-nums; }
+
+/* header */
+.top { display: flex; align-items: center; justify-content: space-between; gap: 16px; padding-bottom: 20px; border-bottom: 1px solid var(--line); }
+.wordmark { font-weight: 800; text-transform: uppercase; color: var(--brand); font-size: 1.45rem; letter-spacing: 0.04em; text-decoration: none; line-height: 1; }
+
+.btn {
+  display: inline-flex; align-items: center; justify-content: center; gap: 10px;
+  background: var(--brand); color: var(--brand-ink);
+  font-family: var(--font); font-weight: 800; text-transform: uppercase; letter-spacing: 0.05em;
+  font-size: 1.15rem; line-height: 1; padding: 16px 26px; border-radius: 2px; text-decoration: none; border: 0;
+}
+.btn:hover { background: #19D6BC; }
+.btn:active { background: #00A890; }
+.btn.small { font-size: 1rem; padding: 12px 18px; min-height: 44px; }
+.wordmark:hover { color: #19D6BC; }
+
+/* hero */
+.hero { display: grid; grid-template-columns: minmax(0, 1.15fr) minmax(0, 0.85fr); gap: 48px; padding-block: 56px; align-items: center; }
+.hero h1 { margin-top: 14px; }
+.hero .lede { font-size: 1.35rem; color: var(--muted); margin-top: 22px; max-width: 34ch; font-weight: 500; }
+.hero .lede b { color: var(--fg); font-weight: 500; }
+.buyrow { display: flex; flex-wrap: wrap; align-items: center; gap: 20px; margin-top: 32px; }
+.price { display: flex; align-items: baseline; gap: 10px; }
+.price strong { font-weight: 800; font-size: 3rem; line-height: 1; }
+.price span { color: var(--muted); font-weight: 500; }
+.markets { margin-top: 18px; color: var(--muted); font-weight: 500; letter-spacing: 0.12em; text-transform: uppercase; font-size: 0.85rem; }
+.hero-media { display: flex; align-items: center; justify-content: center; min-width: 0; }
+.hero-media img { display: block; width: auto; max-width: 100%; height: auto; max-height: 480px; }
+
+/* worked example */
+.example { background: var(--surface); border: 1px solid var(--line); border-radius: 2px; padding: 22px; min-width: 0; }
+.example h3 { margin-top: 6px; font-size: 1.7rem; }
+.cols { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; margin-top: 20px; }
+.offer { border-top: 2px solid var(--line); padding-top: 12px; min-width: 0; }
+.offer .name { font-weight: 800; text-transform: uppercase; letter-spacing: 0.04em; }
+.offer .terms { color: var(--muted); font-size: 0.95rem; font-weight: 500; }
+.stat { margin-top: 14px; }
+.stat .k { color: var(--muted); font-size: 0.8rem; letter-spacing: 0.12em; text-transform: uppercase; font-weight: 500; }
+.stat .v { font-weight: 800; font-size: 1.9rem; line-height: 1.05; }
+.stat .v.good { color: var(--brand); }
+.stat .v.bad { color: var(--danger); }
+.verdict { margin-top: 20px; padding-top: 16px; border-top: 1px solid var(--line); font-weight: 500; }
+.verdict b { color: var(--danger); font-weight: 800; }
+.fine { color: var(--muted); font-size: 0.85rem; margin-top: 10px; }
+
+.proof { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); gap: 48px; align-items: center; }
+.proof-copy { display: grid; gap: 16px; align-content: center; }
+.proof-copy p:not(.label) { color: var(--muted); font-weight: 500; }
+.proof-copy ul { list-style: none; margin: 4px 0 0; padding: 0; display: grid; gap: 10px; }
+
+/* sections */
+section { border-top: 1px solid var(--line); padding-block: 56px; }
+section[id] { scroll-margin-top: 16px; }
+.head { display: grid; gap: 14px; margin-bottom: 32px; }
+
+.grid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 1px; background: var(--line); border: 1px solid var(--line); }
+.cell { display: flex; flex-direction: column; background: var(--bg); padding: 22px; min-width: 0; }
+.cell p { color: var(--muted); margin-top: 10px; font-weight: 500; }
+.cell .tag { margin-top: auto; padding-top: 14px; font-weight: 500; font-size: 0.8rem; letter-spacing: 0.12em; text-transform: uppercase; color: var(--brand); }
+
+.benefits { display: grid; gap: 0; }
+.benefit { display: grid; grid-template-columns: minmax(0, 0.8fr) minmax(0, 1.2fr); gap: 24px; padding-block: 20px; border-top: 1px solid var(--line); align-items: center; }
+.benefit:first-child { border-top: 0; padding-top: 0; }
+.benefit p { color: var(--muted); font-weight: 500; max-width: 52ch; }
+
+.market ul { list-style: none; margin: 10px 0 0; padding: 0; display: grid; gap: 10px; }
+.market li, .vs li, .proof-copy li { font-weight: 500; padding-left: 16px; position: relative; }
+.market li { color: var(--muted); }
+.market li::before, .vs li::before, .proof-copy li::before { content: ""; position: absolute; left: 0; top: 0.62em; width: 8px; height: 2px; background: var(--brand); }
+
+.vs { display: grid; grid-template-columns: 1fr 1fr; gap: 1px; background: var(--line); border: 1px solid var(--line); }
+.vs > div { background: var(--bg); padding: 22px; min-width: 0; }
+.vs h3 { margin-bottom: 10px; }
+.vs ul { list-style: none; padding: 0; margin: 0; display: grid; gap: 10px; }
+.vs .free li { color: var(--muted); }
+.vs .free li::before { background: var(--danger); }
+
+details { border-top: 1px solid var(--line); }
+details:last-of-type { border-bottom: 1px solid var(--line); }
+summary { cursor: pointer; list-style: none; padding: 18px 0; font-weight: 800; text-transform: uppercase; letter-spacing: 0.02em; font-size: 1.3rem; display: flex; justify-content: space-between; gap: 16px; align-items: center; }
+summary:hover { color: var(--brand); }
+summary::-webkit-details-marker { display: none; }
+summary::after { content: "+"; color: var(--brand); font-size: 1.6rem; line-height: 1; flex: none; }
+details[open] summary::after { content: "\2212"; }
+details p { color: var(--muted); padding: 0 0 20px; max-width: 62ch; font-weight: 500; }
+.faq { max-width: 760px; }
+
+.final { display: grid; gap: 24px; justify-items: start; }
+.final p { max-width: 44ch; font-weight: 500; }
+.final .buyrow { margin-top: 0; }
+
+.legal { border-top: 1px solid var(--line); padding-top: 24px; color: var(--muted); font-size: 0.9rem; max-width: 80ch; display: grid; gap: 10px; }
+.legal .warn { color: var(--danger); font-weight: 500; letter-spacing: 0.12em; text-transform: uppercase; font-size: 0.8rem; }
+
+@media (max-width: 860px) {
+  .hero { grid-template-columns: minmax(0, 1fr); gap: 40px; padding-block: 40px; }
+  .benefit { grid-template-columns: minmax(0, 1fr); gap: 6px; align-items: start; }
+  .grid { grid-template-columns: 1fr; }
+  .grid.thirds { grid-template-columns: 1fr 1fr; }
+  .vs, .proof { grid-template-columns: 1fr; }
+  .proof { gap: 28px; }
+  section { padding-block: 44px; }
+}
+@media (max-width: 560px) {
+  .grid.thirds { grid-template-columns: 1fr; }
+}
+@media (max-width: 420px) {
+  body { font-size: 18px; }
+  .cols { grid-template-columns: 1fr; }
+  .btn { width: 100%; }
+  .top .btn { width: auto; }
+}
+@media (prefers-reduced-motion: no-preference) {
+  html { scroll-behavior: smooth; }
+  .btn, .wordmark, summary { transition: background-color 0.15s ease, color 0.15s ease; }
+}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <header class="top" id="top">
+    <a class="wordmark" href="#top">Decision Kit</a>
+    <!-- Replace #checkout with your payment link on every .buy-link -->
+    <a class="btn small buy-link" href="#checkout">Get the kit &middot; $29</a>
+  </header>
+
+  <main>
+    <div class="hero">
+      <div>
+        <p class="label">For first-time used car buyers</p>
+        <h1>Know what to check, what to ask and what it will really cost.</h1>
+        <p class="lede">A guide, <b>printable checklists</b> and <b>working calculators</b> for buying a used car from a dealer or a private seller. No car knowledge needed.</p>
+        <div class="buyrow">
+          <a class="btn buy-link" href="#checkout">Get the kit</a>
+          <div class="price num"><strong>$29</strong><span>one-time &middot; instant download</span></div>
+        </div>
+        <p class="markets">Covers recalls, titles and the FTC Buyers Guide</p>
+      </div>
+
+      <div class="hero-media">
+        <img src="images/hero-kit.png" alt="Used Car Buyer's Decision Kit" width="815" height="745">
+      </div>
+    </div>
+
+    <section class="proof" aria-labelledby="proof-h">
+      <div class="proof-copy">
+        <p class="label">Before you sign</p>
+        <h2 id="proof-h">Look past the monthly payment</h2>
+        <p>A seller can lower the payment by adding months. The rate can look better at the same time. The total you pay over the life of the loan is what shows which offer costs more.</p>
+        <p>The financing calculator compares two offers from the price, the cash down, the trade, and the taxes and fees.</p>
+        <ul>
+          <li>The monthly payment</li>
+          <li>The total cost of the loan</li>
+          <li>The difference between the two</li>
+        </ul>
+      </div>
+      <aside class="example" aria-label="Worked example from the financing calculator">
+        <p class="label">From the financing calculator</p>
+        <h3>A lower payment can cost more</h3>
+        <div class="cols">
+          <div class="offer">
+            <div class="name">Offer A</div>
+            <div class="terms num">7.9% &middot; 60 months</div>
+            <div class="stat"><div class="k">Monthly</div><div class="v num">$246.79</div></div>
+            <div class="stat"><div class="k">Total cost</div><div class="v good num">$18,807</div></div>
+          </div>
+          <div class="offer">
+            <div class="name">Offer B</div>
+            <div class="terms num">7.2% &middot; 72 months</div>
+            <div class="stat"><div class="k">Monthly</div><div class="v good num">$209.17</div></div>
+            <div class="stat"><div class="k">Total cost</div><div class="v bad num">$19,060</div></div>
+          </div>
+        </div>
+        <p class="verdict">Offer B has the smaller payment and the lower rate. It costs <b class="num">$253.04</b> more over the life of the loan.</p>
+        <p class="fine">Example: $15,000 car, $2,000 down, $2,000 trade-in equity, $1,200 taxes and fees.</p>
+      </aside>
+    </section>
+
+    <section aria-labelledby="inside">
+      <div class="head"><p class="label">What you get</p><h2 id="inside">Everything for the viewing, the loan and the paperwork</h2></div>
+      <div class="grid thirds">
+        <div class="cell"><h3>Buyer's Guide</h3><p>Ten modules from budget to the final decision, with worksheets and plain-English explanations.</p><span class="tag">PDF + Word</span></div>
+        <div class="cell"><h3>Printable checklists</h3><p>Inspection, test drive, history report, seller questions, final decision and post-purchase.</p><span class="tag">6 sheets &middot; PDF + Word</span></div>
+        <div class="cell"><h3>Calculators</h3><p>Budget, comparison tracker, two-loan comparison with schedule, and total cost of ownership.</p><span class="tag">Google Sheets + Excel</span></div>
+        <div class="cell"><h3>Negotiation scripts</h3><p>Seven natural scripts, from asking for service records to walking away.</p><span class="tag">PDF + Word</span></div>
+        <div class="cell"><h3>Paperwork guide</h3><p>Titles, liens, recalls, taxes and fees, dealer paperwork and links to the official sources.</p><span class="tag">PDF + Word</span></div>
+        <div class="cell"><h3>Decision framework</h3><p>Proceed, investigate further or walk away. No fake score that pretends a checklist proves a car is sound.</p><span class="tag">In the guide</span></div>
+      </div>
+    </section>
+
+    <section aria-labelledby="why">
+      <div class="head"><p class="label">What changes for you</p><h2 id="why">Five things you can do after reading</h2></div>
+      <div class="benefits">
+        <div class="benefit"><h3>Know what you can afford</h3><p>See the real cost with total interest, insurance, fuel and repairs, not only the monthly payment.</p></div>
+        <div class="benefit"><h3>Inspect with confidence</h3><p>Every item says what to look for, why it matters, what may signal a problem and what to do next.</p></div>
+        <div class="benefit"><h3>Ask the right questions</h3><p>Separate lists for private sellers and dealerships, with neutral guidance on answers worth a second look.</p></div>
+        <div class="benefit"><h3>Negotiate with evidence</h3><p>Turn comparable listings and inspection findings into a fair offer, and know your walk-away number.</p></div>
+        <div class="benefit"><h3>Know what to confirm for your state</h3><p>Taxes, fees and title rules vary by state. The kit points you to the official sources to check before you pay.</p></div>
+      </div>
+    </section>
+
+    <section class="market" aria-labelledby="markets">
+      <div class="head"><p class="label">What to confirm</p><h2 id="markets">Know what to check before you pay</h2></div>
+      <div class="grid">
+        <div class="cell"><h3>Before you buy</h3><ul><li>NHTSA recall lookup by VIN</li><li>NMVTIS title, brand and odometer reports</li><li>Signed title, lien check and bill of sale</li></ul></div>
+        <div class="cell"><h3>At the dealership</h3><ul><li>Read the FTC Buyers Guide: as is or warranty</li><li>No federal 3-day right to cancel</li><li>Get the out-the-door price in writing</li></ul></div>
+        <div class="cell"><h3>Your state</h3><ul><li>Sales tax, title and registration fees</li><li>Title transfer forms and deadlines</li><li>Where to confirm with your state agency</li></ul></div>
+      </div>
+    </section>
+
+    <section aria-labelledby="free">
+      <div class="head"><p class="label">Kit or free articles</p><h2 id="free">One process instead of fifty tabs</h2></div>
+      <div class="vs">
+        <div class="free"><h3>Free articles and videos</h3><ul><li>Scattered, repeated and never in one place</li><li>Advice with no way to do the math</li><li>Nothing to print and carry to a viewing</li><li>Rarely say what they cannot tell you</li></ul></div>
+        <div class="kit"><h3>The Decision Kit</h3><ul><li>One sequence from budget to purchase</li><li>Calculators that compare offers and total cost</li><li>Checklists with space to write what you saw</li><li>Clear about limits and which facts to verify</li></ul></div>
+      </div>
+    </section>
+
+    <section aria-labelledby="faq-h">
+      <div class="head"><p class="label">Questions</p><h2 id="faq-h">Before you buy</h2></div>
+      <div class="faq">
+        <details><summary>Who is this for?</summary><p>First-time and cautious used car buyers, whether you are buying from a dealership or a private seller.</p></details>
+        <details><summary>Does it cover my state?</summary><p>It covers the federal rules and the steps that apply in every state, and flags what changes by state: taxes, fees, title transfer, inspections and cancellation rights. State rules differ, so the kit links to the official sources to confirm yours.</p></details>
+        <details><summary>Do I need to know about cars?</summary><p>No. Everything is written in plain English and explains what to look for, why it matters and what to do about it.</p></details>
+        <details><summary>Can I use it with a dealership?</summary><p>Yes. It has a dealership question list, financing tools and guidance on warranties, add-ons and return policies.</p></details>
+        <details><summary>Can I use it with a private seller?</summary><p>Yes. It covers ownership paperwork, outstanding finance and liens, and warning signs of scams.</p></details>
+        <details><summary>Does it replace a mechanic's inspection?</summary><p>No. It helps you spot warning signs and decide when to get an independent inspection, which is recommended for most purchases.</p></details>
+        <details><summary>Is the financing calculator a loan approval tool?</summary><p>No. It estimates payments and total cost from the numbers you enter. A lender decides approval, and your signed agreement sets the real terms.</p></details>
+      </div>
+    </section>
+
+    <section class="final" id="checkout" aria-labelledby="final-h">
+      <h2 id="final-h">Walk in prepared</h2>
+      <p class="muted">Get the guide, checklists, scripts and calculators in one download.</p>
+      <div class="buyrow">
+        <a class="btn buy-link" href="#checkout">Get the kit</a>
+        <div class="price num"><strong>$29</strong><span>one-time &middot; instant download</span></div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="legal">
+    <span class="warn">Please note</span>
+    <p>Educational information only. This kit is not legal, financial, tax, insurance or mechanical advice and does not guarantee that any vehicle is safe, reliable or free of defects. Following it can help you notice more issues before you buy, but it cannot prevent every bad purchase. Calculators give estimates and are not a loan approval. Laws, fees and official services change and differ by location; confirm state-specific points with your state's motor vehicle agency and the official sources listed in the kit.</p>
+  </footer>
+</div>
+</body>
+</html>
